@@ -1,0 +1,54 @@
+# Anchor/Solana
+.anchor
+test-ledger/
+
+# Elm
+elm-stuff/
+elm.js
+
+# Build outputs
+target/
+dist/
+build/
+public/
+
+# Dependencies
+node_modules/
+.yarn
+
+# Build outputs
+*bundle.js
+frontend/bundle-deps.js
+frontend/ports-bundle.js
+frontend/main.js
+frontend/init.js
+frontend/ports-original.js
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+.tmp/
+tmp/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Rust
+**/*.rs.bk

@@ -1,0 +1,26 @@
+{
+  "name": "event-ticketing-frontend",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Solana Event Ticketing Frontend",
+  "scripts": {
+    "build": "npm run clean && npm run build:elm && npm run build:ports && npm run build:copy && npm run build:deploy",
+    "clean": "rm -rf dist && mkdir -p dist",
+    "build:elm": "npx elm make src/Main.elm --output=dist/elm.js --optimize",
+    "build:ports": "node_modules/.bin/rollup -c rollup.config.js",
+    "build:copy": "cp index.html event_ticketing.json dist/",
+    "build:deploy": "cd .. && rm -rf public && cp -r frontend/dist public"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.31.1",
+    "@solana/web3.js": "^1.95.8",
+    "buffer": "^6.0.3"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.1",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.3.0",
+    "elm": "^0.19.1-5",
+    "rollup": "^4.28.1"
+  }
+}

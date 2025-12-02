@@ -1,0 +1,8 @@
+{
+  "name": "event-ticketing-solana",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "vercel-build": "cd frontend && npm run build && cd .. && mkdir -p public && cp -r frontend/dist/* public/ && echo 'Public directory created:' && ls -la public"
+  }
+}

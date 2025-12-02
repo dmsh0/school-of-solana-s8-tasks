@@ -1,0 +1,407 @@
+{
+  "address": "5wkLPJVMaiemo3Nn5QdAgdifjZig3DWUR9pxAGAeCXZJ",
+  "metadata": {
+    "name": "event_ticketing",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "cancel_event",
+      "discriminator": [55, 143, 36, 45, 59, 241, 89, 119],
+      "accounts": [
+        {
+          "name": "event",
+          "writable": true
+        },
+        {
+          "name": "event_authority",
+          "signer": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "check_in",
+      "discriminator": [209, 253, 4, 217, 250, 241, 207, 50],
+      "accounts": [
+        {
+          "name": "event"
+        },
+        {
+          "name": "ticket",
+          "writable": true
+        },
+        {
+          "name": "event_authority",
+          "signer": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize_event",
+      "discriminator": [126, 249, 86, 221, 202, 171, 134, 20],
+      "accounts": [
+        {
+          "name": "event",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [101, 118, 101, 110, 116]
+              },
+              {
+                "kind": "account",
+                "path": "event_authority"
+              },
+              {
+                "kind": "arg",
+                "path": "event_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "event_authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "event_id",
+          "type": "u32"
+        },
+        {
+          "name": "price",
+          "type": "u64"
+        },
+        {
+          "name": "supply",
+          "type": "u32"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "date",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "mint_ticket",
+      "discriminator": [159, 167, 223, 60, 138, 6, 23, 29],
+      "accounts": [
+        {
+          "name": "event",
+          "writable": true
+        },
+        {
+          "name": "ticket",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [116, 105, 99, 107, 101, 116]
+              },
+              {
+                "kind": "account",
+                "path": "event"
+              },
+              {
+                "kind": "account",
+                "path": "event.sold",
+                "account": "Event"
+              }
+            ]
+          }
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [118, 97, 117, 108, 116]
+              },
+              {
+                "kind": "account",
+                "path": "event"
+              }
+            ]
+          }
+        },
+        {
+          "name": "buyer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "refund",
+      "discriminator": [2, 96, 183, 251, 63, 208, 46, 46],
+      "accounts": [
+        {
+          "name": "event"
+        },
+        {
+          "name": "ticket",
+          "writable": true
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [118, 97, 117, 108, 116]
+              },
+              {
+                "kind": "account",
+                "path": "event"
+              }
+            ]
+          }
+        },
+        {
+          "name": "ticket_owner",
+          "writable": true
+        },
+        {
+          "name": "event_authority",
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "register_organizer",
+      "discriminator": [176, 92, 85, 75, 13, 188, 124, 159],
+      "accounts": [
+        {
+          "name": "organizer_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [111, 114, 103, 97, 110, 105, 122, 101, 114]
+              },
+              {
+                "kind": "account",
+                "path": "organizer"
+              }
+            ]
+          }
+        },
+        {
+          "name": "organizer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "transfer_ticket",
+      "discriminator": [191, 184, 74, 239, 164, 172, 188, 32],
+      "accounts": [
+        {
+          "name": "ticket",
+          "writable": true
+        },
+        {
+          "name": "current_owner",
+          "signer": true
+        },
+        {
+          "name": "new_owner"
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Event",
+      "discriminator": [125, 192, 125, 158, 9, 115, 152, 233]
+    },
+    {
+      "name": "OrganizerRegistry",
+      "discriminator": [86, 12, 14, 195, 145, 159, 246, 157]
+    },
+    {
+      "name": "Ticket",
+      "discriminator": [41, 228, 24, 165, 78, 90, 235, 200]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "EventAlreadyExists",
+      "msg": "Event already exists"
+    },
+    {
+      "code": 6001,
+      "name": "EventSoldOut",
+      "msg": "Event is sold out"
+    },
+    {
+      "code": 6002,
+      "name": "EventCanceled",
+      "msg": "Event has been canceled"
+    },
+    {
+      "code": 6003,
+      "name": "UnauthorizedTransfer",
+      "msg": "Only the ticket owner can transfer"
+    },
+    {
+      "code": 6004,
+      "name": "TicketAlreadyUsed",
+      "msg": "Cannot transfer a used ticket"
+    },
+    {
+      "code": 6005,
+      "name": "AlreadyCheckedIn",
+      "msg": "Ticket has already been checked in"
+    },
+    {
+      "code": 6006,
+      "name": "UnauthorizedCheckIn",
+      "msg": "Only event authority can check in tickets"
+    },
+    {
+      "code": 6007,
+      "name": "CannotRefundUsedTicket",
+      "msg": "Cannot refund a used ticket"
+    },
+    {
+      "code": 6008,
+      "name": "AlreadyRefunded",
+      "msg": "Ticket has already been refunded"
+    },
+    {
+      "code": 6009,
+      "name": "NameTooLong",
+      "msg": "Event name is too long"
+    },
+    {
+      "code": 6010,
+      "name": "DateTooLong",
+      "msg": "Event date is too long"
+    }
+  ],
+  "types": [
+    {
+      "name": "Event",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "event_authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "price",
+            "type": "u64"
+          },
+          {
+            "name": "supply",
+            "type": "u32"
+          },
+          {
+            "name": "sold",
+            "type": "u32"
+          },
+          {
+            "name": "canceled",
+            "type": "bool"
+          },
+          {
+            "name": "event_id",
+            "type": "u32"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "date",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "OrganizerRegistry",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "organizer",
+            "type": "pubkey"
+          },
+          {
+            "name": "registered_at",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ticket",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "event",
+            "type": "pubkey"
+          },
+          {
+            "name": "ticket_id",
+            "type": "u32"
+          },
+          {
+            "name": "is_used",
+            "type": "bool"
+          },
+          {
+            "name": "refunded",
+            "type": "bool"
+          }
+        ]
+      }
+    }
+  ]
+}
